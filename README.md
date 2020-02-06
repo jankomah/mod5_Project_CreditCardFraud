@@ -2,32 +2,9 @@
 
 * Student name: Joshua Owusu Ankomah
 * School name:  Flatiron School
-* Project deadline 
+* Project deadline  
 * Instructor name: Dan Sanz
 
-### Project Overview
-In this project I trained several models to detect fraud transactions. I run 5 baseline models , LogisticRegression, KNeighborsClassifier, RandomForestClassifier, XGBClassifier, SupportVectorMachine Classifier. I continued to optimize top two models based on their train and test accuracy result. XGBoost and RandomForest Models. I did five iterations including grid search on hyperparameters, balancing the labels by SMOTE and subsampling from the original dataset. Both RandomForest and XGBoost model had over 99% accuracy on the data that includes all frauds and some random safe data. The data was still imbalanced so I did SMOTE over this dataset as well. At the end of those iterations, **XGBoost model had 99% accuracy** on both train and test sets.  
-**Final Iterations saw the performance of both Random Forest and XGBoost rise to 100% accuracy**
-
-
-### Project Steps
-
-- 1.Loading Data and EDA
-- 2.Feature Engineering
-- 3.Machine Learning
-    - 3.1. Baseline Models
-    - 3.2. Grid Search for Best Hyper-parameter
-    - 3.3. Dealing with Unbalanced Data
-    - 3.3.1. Balancing Data via Resambling with SMOTE
-    - 3.3.2. Subsampling Data from the Original Dataset
-    - 3.3.3 Performing SMOTE on the New Data
-    - 3.3.3a HyperParameter Optimization And Visualization of ROC_Curve of Models
-             RandomForestModel and XGBoost Model
-
-- 4.Machine Learning Pipeline
-- 5.Feature Importance
-- 6.Conclusion
-- 7.Future Works
 
 
 ### Data
@@ -59,7 +36,27 @@ https://www.kaggle.com/ntnu-testimon/paysim1
 
 
 
-# Other Additions: Interpretation of classification reports
+### Project Steps
+
+- 1.Loading Data and EDA
+- 2.Feature Engineering
+- 3.Machine Learning
+    - 3.1. Baseline Models
+    - 3.2. Grid Search for Best Hyper-parameter
+    - 3.3. Dealing with Unbalanced Data
+    - 3.3.1. Balancing Data via Resambling with SMOTE
+    - 3.3.2. Subsampling Data from the Original Dataset
+    - 3.3.3 Performing SMOTE on the New Data
+    - 3.3.3a HyperParameter Optimization And Visualization of ROC_Curve of Models
+             RandomForestModel and XGBoost Model
+
+- 4.Machine Learning Pipeline
+- 5.Feature Importance
+- 6.Conclusion
+
+
+
+# Other Additions: Reasons for classification reports
 
 # Precision
 
@@ -78,7 +75,56 @@ https://www.kaggle.com/ntnu-testimon/paysim1
 - Support is the number of actual occurrences of the class in the specified dataset. Imbalanced support in the training data may indicate structural weaknesses in the reported scores of the classifier and could indicate the need for stratified sampling or rebalancing. Support doesn’t change between models but instead diagnoses the evaluation process.
 
 
-#Conclusion:
+
+
+
+### EDA Findings:
+
+- Eventhough safe transactions slows down in 3rd and 4th day and after 16th day of the month, fraud transactions happens at a steady pace. Especially in the second half of the month there are much less safe transactions but number of fraud transactions does not decrease at all. 
+
+- Fraud proportion over all transactions is 0.01% while the fraud amount proportion is 0.1%
+
+- There is some sort of seasonality in the number of transaction every 24 hours.Fraud transactions does not show that significant pattern. They happen every hour almost in the same frequency.
+
+- There are more fraud transactions in low amounts and less in high amount. This distribution does not change much.
+
+- Fraud transaction happens in a large range such as $119 dolars to  $10M dolars.
+ Most of the fraud transactions are of Lesser amount. But in $1M there is an interesting increase similar to safe transactions. 
+
+- There are 16 fake fraud cases  with '0' amount.
+
+- Fraud activities only happens with TRANSFER and CASH_OUT transactions. DEBIT usage is very safe.
+
+
+
+### Project Modelling Overview
+- In this project I trained several models to detect fraud transactions after slecting my baseline model. 
+  
+- I run 5 baseline models , LogisticRegression, KNeighborsClassifier, RandomForestClassifier, XGBClassifier, SupportVectorMachine   Classifier. 
+
+- I continued to optimize top two models based on their train and test accuracy result. XGBoost and RandomForest Models. 
+
+- I did five iterations including grid search on hyperparameters, balancing the labels by SMOTE and subsampling from the     original dataset. 
+  Both RandomForest and XGBoost model had over 99% accuracy on the data that includes all frauds and some random safe data. 
+  
+- The data was still imbalanced so I did SMOTE over this dataset as well. At the end of those iterations, **XGBoost model had 99% accuracy** on both train and test sets.  
+
+- **Final Iterations saw the performance of both Random Forest and XGBoost rise to 100% accuracy**
+
+
+### Feature Importance
+### Observations : 
+- We can see that the most important features of the random forest model is the OldBalanceDest ,NewBalanceDest and  Step
+
+- XGBoost's most important features are newbalance , oldbalanceOrg and Step.
+
+- Each Model gives different importance to the features ; however , oldbalanceOrg and newbalanceDest are the major indicators for both models
+
+
+
+
+
+# Conclusion:
 
 ### Accuracy results after iterations
 I created a model that can predict fraud transactions. I used XGBoost and RandomForest  classifiers in this model. 
