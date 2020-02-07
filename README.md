@@ -63,7 +63,7 @@ This synthetic dataset is scaled down 1/4 of the original dataset and it is crea
 
 
 
-### Data
+# Data
 https://www.kaggle.com/ntnu-testimon/paysim1
 
 **Variables in the columns of the Dataset:**
@@ -99,10 +99,52 @@ number of errors. I will be running through a couple of different models to see 
 
 
 
+# EDA Findings and Preprocessing:
 
-### EDA Findings and Preprocessing:
 
-- Eventhough safe transactions slows down in 3rd and 4th day and after 16th day of the month, fraud transactions happens at a steady pace. Especially in the second half of the month there are much less safe transactions but number of fraud transactions does not decrease at all. 
+# 1.Observations¶
+
+Distrubition plot shows number of transactions occured each hour (step). There are drastic changes in the number of transactions occuriing from time to time.
+
+
+# 2.Observations :
+ we can see that after 72 hours and 90 hours and after 400 hours during the month , the fraud transctions occur at a steady pace.
+
+# 3.Observation :
+* The plot indicates some sort of seasonality in the number of transaction during the day. A pattern is observed every 24 hour ;however , we do not know what time of the day fully represents "0" represents on the graph but a higher transaction clusters around the middle of the 24hour period.
+
+# 4.Observations:
+* We can see that the fraudlent transactions do not show a significant pattern as compared to the graph of the safe transactions in terms of number of occurence.
+* The fraudulent tranactions occur almost every hour at the same frequency . There are more fraud transactions in low amounts and less in high amounts. However , there are no changes in the pattern.
+
+# 5.Observations:
+* We can see that the safe transactions are in very low amounts ;however , there is a peek in $1M but above that the frequency decreases
+
+# 6.Observation:
+There is an interesting peak on $1m. let's investigate a bit more on how many fraudent transactions happenning at $1m
+
+# 7.Observation:
+We can see that fraudulent cases of $1M occurred 287 times and this is the maximum amount.
+Also there is an interesting amount of 0.00 which occured 16 times
+Also a few amounts have been flagged as fraudulent transactions
+
+# 8.Overall Observations:
+Fraud transactions happen in large range from $119 to &10M. The frequency distribution of the amount of money involved in fraud transactions is positively skewed. Most of the fraud transactions are small amounts.
+Majority of fraudulent transactions are lower than $1M . However in $1M there is an interesting increase similar to safe transactionsand that is also the maximum amount in all fraud transactions. There are also the maximum amount in all fraud transactions. There are also some fraud labelled transactions that have 0 amount. There are also 16 of these transactions.
+
+# 9.Observations
+We can see that all the fraudulent transactions are only with cash_outs and Trasnfers. Debit usage is very safe. Therefore it is best to use only the Cash_Out and Transfer Data for the model since the other type of transactions have no fraudulent activities involved.
+
+# 10.Observations:
+Only 16 transactions were postively flagged fraud and all of them happend to be Transfers. All positive values on the isFlaggedFraud are also positive on isFraud column. There are also inconsistencies in Origin and destination balances on these instances. Maybe that is why they were marked Fraud. That is valuable information to keep too.
+
+
+
+# Summary of Observations
+- I first discovered was that the number of transactions occured each hour and but there seemed to be some drastic changes in the number of transactions occuring from time to time.
+
+- It was also observed that after 72 hours , 90 hours and after 400 hours during the month the fraud transactions occur at a steady pace.
+Thus , eventhough safe transactions slows down in 3rd and 4th day and after 16th day of the month, fraud transactions happens at a steady pace. Especially in the second half of the month there are much less safe transactions but number of fraud transactions does not decrease at all. 
 
 - Fraud proportion over all transactions is 0.01% while the fraud amount proportion is 0.1%
 
@@ -120,7 +162,7 @@ number of errors. I will be running through a couple of different models to see 
 
 
 
-### Project Modelling Overview
+# Project Modelling Overview
 - In this project I trained several models to detect fraud transactions after selecting my baseline model. 
   
 - I run 5 main models , LogisticRegression, KNeighborsClassifier, RandomForestClassifier, XGBClassifier, SupportVectorMachine   Classifier. 
@@ -137,7 +179,7 @@ number of errors. I will be running through a couple of different models to see 
 
 
 
-### Feature Importance
+# Feature Importance
 ### Observations : 
 - We can see that the most important features of the random forest model is the OldBalanceDest ,NewBalanceDest and  Step
 
@@ -148,36 +190,23 @@ number of errors. I will be running through a couple of different models to see 
 
 
 
-
 # Conclusion:
-
 ### Accuracy results after iterations
 - I created a model that can predict fraud transactions. I used XGBoost and RandomForest  classifiers in this model. 
 
-      (Data & Parameters)                                                        (Accuracy) XGBoost   RandomForest
-    **Iteration 1**                                                            
-    
-    - Random Sample & default parameters                                                     100%       83%                
-    
-    **Iteration 2** 
-    
-    - Random Sample & best parameters                                                        85.5%     84.3%
-    
-    **Iteration 3**
-    
-    - Balanced data with SMOTE & best parameters                                             99.4%     98.7% 
-      
-    **Iteration 4**
-    
-    - Random Safe trans. data and all Fraud data & best parameters                           98.8%     99.6%
-    
-    **Iteration 5**
-    
-    - New data balanced with SMOTE & best parameters                                         99%       92.1%
-
-    **Final Iteration**
-    
-    - New Balanced data with SMOTE & best HpyerParametr Tuning .                             100%      100%
+      (Data & Parameters)                               (Accuracy) XGBoost   RandomForest
+ **Iteration 1**                                                            
+    - Random Sample & default parameters                              100%       83%                
+ **Iteration 2** 
+    - Random Sample & best parameters                                 85.5%     84.3%       ****                   ***
+ **Iteration 3**
+    - Balanced data with SMOTE & best parameters                      99.4%     98.7% 
+ **Iteration 4**
+    - Random Safe trans. data and all Fraud data & best parameters    98.8%     99.6%
+ **Iteration 5**
+    - New data balanced with SMOTE & best parameters                  99%       92.1%
+ **Final Iteration**
+    - New Balanced data with SMOTE & best HpyerParametr Tuning .      100%      100%
 
 
 
