@@ -92,9 +92,11 @@ https://www.kaggle.com/ntnu-testimon/paysim1
 
 
 
+
 # Goal: 
 - My goal is to classify the data according to fraud detection and create the best model that best detects fraud with the least
 number of errors. I will be running through a couple of different models to see which one performs best for my data.
+
 
 
 
@@ -117,6 +119,7 @@ number of errors. I will be running through a couple of different models to see 
 
 
 
+
 ### Project Modelling Overview
 - In this project I trained several models to detect fraud transactions after selecting my baseline model. 
   
@@ -130,6 +133,8 @@ number of errors. I will be running through a couple of different models to see 
 - The data was still imbalanced so I did SMOTE over this dataset as well. At the end of those iterations, **XGBoost model had 99% accuracy** on both train and test sets.  
 
 - **Final Iterations saw the performance of both Random Forest and XGBoost rise to 100% accuracy**
+
+
 
 
 ### Feature Importance
@@ -149,24 +154,30 @@ number of errors. I will be running through a couple of different models to see 
 ### Accuracy results after iterations
 - I created a model that can predict fraud transactions. I used XGBoost and RandomForest  classifiers in this model. 
 
-      (Data & Parameters)                              (Accuracy)   XGBoost   RandomForest
+      (Data & Parameters)                                                        (Accuracy) XGBoost   RandomForest
     **Iteration 1**                                                            
-    - Random Sample & default parameters                                100%       83%                
+    
+    - Random Sample & default parameters                                                     100%       83%                
     
     **Iteration 2** 
-    - Random Sample & best parameters                                   85.5%     84.3%
+    
+    - Random Sample & best parameters                                                        85.5%     84.3%
     
     **Iteration 3**
-    - Balanced data with SMOTE & best parameters                        99.4%     98.7% 
+    
+    - Balanced data with SMOTE & best parameters                                             99.4%     98.7% 
       
     **Iteration 4**
-    - Random Safe trans. data and all Fraud data & best parameters      98.8%     99.6%
+    
+    - Random Safe trans. data and all Fraud data & best parameters                           98.8%     99.6%
     
     **Iteration 5**
-    - New data balanced with SMOTE & best parameters                    99%       92.1%
+    
+    - New data balanced with SMOTE & best parameters                                         99%       92.1%
 
     **Final Iteration**
-    - New Balanced data with SMOTE & best HpyerParametr Tuning .       100%      100%
+    
+    - New Balanced data with SMOTE & best HpyerParametr Tuning .                             100%      100%
 
 
 
