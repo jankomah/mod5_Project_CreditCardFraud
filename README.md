@@ -7,23 +7,19 @@
 
 
 # Context
-
 There is a lack of public available datasets on financial services and specially in the emerging mobile money transactions domain. Financial datasets are important to many researchers and in particular to us performing research in the domain of fraud detection. Part of the problem is the intrinsically private nature of financial transactions, that leads to no publicly available datasets.
 
 We present a synthetic dataset generated using the simulator called PaySim as an approach to such a problem. PaySim uses aggregated data from the private dataset to generate a synthetic dataset that resembles the normal operation of transactions and injects malicious behaviour to later evaluate the performance of fraud detection methods.
 
 
 # Content
-
 PaySim simulates mobile money transactions based on a sample of real transactions extracted from one month of financial logs from a mobile money service implemented in an African country. The original logs were provided by a multinational company, who is the provider of the mobile financial service which is currently running in more than 14 countries all around the world.
 
 This synthetic dataset is scaled down 1/4 of the original dataset and it is created just for Kaggle.
 
 
 
-
-### Project Steps
-
+# Project Steps
 - 1.Loading Data and EDA
 - 2.Feature Engineering
 - 3.Machine Learning
@@ -45,19 +41,15 @@ This synthetic dataset is scaled down 1/4 of the original dataset and it is crea
 # Other Additions: Reasons for classification reports
 
 # Precision
-
 - Precision is the ability of a classiifer not to label an instance positive that is actually negative. For each class it is defined as as the ratio of true positives to the sum of true and false positives. Said another way, “for all instances classified positive, what percent was correct?”
 
 # Recall
-
 - Recall is the ability of a classifier to find all positive instances. For each class it is defined as the ratio of true positives to the sum of true positives and false negatives. Said another way, “for all instances that were actually positive, what percent was classified correctly?”
 
 # f1 score
-
 - The F1 score is a weighted harmonic mean of precision and recall such that the best score is 1.0 and the worst is 0.0. Generally speaking, F1 scores are lower than accuracy measures as they embed precision and recall into their computation. As a rule of thumb, the weighted average of F1 should be used to compare classifier models, not global accuracy.
 
 # support
-
 - Support is the number of actual occurrences of the class in the specified dataset. Imbalanced support in the training data may indicate structural weaknesses in the reported scores of the classifier and could indicate the need for stratified sampling or rebalancing. Support doesn’t change between models but instead diagnoses the evaluation process.
 
 
@@ -178,13 +170,10 @@ Thus , eventhough safe transactions slows down in 3rd and 4th day and after 16th
 
 
 
-
 # Feature Importance
 ### Observations : 
 - We can see that the most important features of the random forest model is the OldBalanceDest ,NewBalanceDest and  Step
-
 - XGBoost's most important features are newbalance , oldbalanceOrg and Step.
-
 - Each Model gives different importance to the features ; however , oldbalanceOrg and newbalanceDest are the major indicators for both models
 
 
@@ -196,15 +185,20 @@ Thus , eventhough safe transactions slows down in 3rd and 4th day and after 16th
 
       (Data & Parameters)                               (Accuracy) XGBoost   RandomForest
  **Iteration 1**                                                            
-    - Random Sample & default parameters                              100%       83%                
+    - Random Sample & default parameters                              100%      83%                
+ 
  **Iteration 2** 
     - Random Sample & best parameters                                 85.5%     84.3%       ****                   ***
+ 
  **Iteration 3**
     - Balanced data with SMOTE & best parameters                      99.4%     98.7% 
+ 
  **Iteration 4**
     - Random Safe trans. data and all Fraud data & best parameters    98.8%     99.6%
+ 
  **Iteration 5**
     - New data balanced with SMOTE & best parameters                  99%       92.1%
+ 
  **Final Iteration**
     - New Balanced data with SMOTE & best HpyerParametr Tuning .      100%      100%
 

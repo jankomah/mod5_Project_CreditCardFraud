@@ -11,7 +11,6 @@ def map_type(column):
 new_col = map_type(df1["type"])
 
 
-
 # Base function
 def base_func(element):
     """train and fit the model"""
@@ -54,6 +53,7 @@ def grd_src(classifier , param_grid):
     return grid_search.best_params_
 
 
+
 # Grid Search for best Parameters with estimator 2.0
 def grid_srch(classifier , param_grid):
     param_grid = param_grid
@@ -72,9 +72,52 @@ def grid_srch(classifier , param_grid):
     return grid_search.best_estimator_
 
 
+# Run Models for best parameters - Main Model function
+def run_model(model, X_train, y_train,X_test, y_test ):
+    model.fit(X_train, y_train)
+
+    """predictions"""
+    train_preds = model.predict_proba(X_train).argmax(1)
+    test_preds = model.predict_proba(X_test).argmax(1)
+
+    
+    """plotting ROC Curve"""
+    fpr, tpr, threshold = metrics.roc_curve(y_test, test_preds)
+    roc_auc = metrics.auc(fpr, tpr)
+    plt.title('Receiver Operating Characteristic')
+    plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % roc_auc)
+    plt.legend(loc = 'lower right')
+    plt.plot([0, 1], [0, 1],'r--')
+    plt.ylabel('True Positive Rate')
+    plt.xlabel('False Positive Rate')
+    plt.gcf().savefig('roc.png')
+
+    """evaluations"""
+    train_auc = roc_auc_score(y_train, train_preds)
+    test_auc = roc_auc_score(y_test, test_preds)
+    report = classification_report(y_test, test_preds)
+
+    print(metrics.confusion_matrix(y_test, test_preds))
+
+    test_preds[test_preds>roc_auc]= 1
+    test_preds[test_preds<=roc_auc]= 0
+
+    """print reports of the model accuracy"""
+    print('Model Scores')
+    print("------------------------")
+    print(f"Training AUC: {(train_auc * 100):.4}%")
+    print(f"Test AUC:     {(test_auc * 100):.4}%")
+    print("------------------------------------------------------")
+    print('Classification Report : \n', report)
+    return test_preds
+
+
+
+
+
 
 # Run Models for best parameters
-def run_model(model, X_train, y_train,X_test, y_test ):
+def run_model2(model, X_train, y_train,X_test, y_test ):
     model.fit(X_train, y_train)
 
     """predict"""
@@ -96,7 +139,7 @@ def run_model(model, X_train, y_train,X_test, y_test ):
 
 
 # Run models with Confusion Matrix
-def run_model2(model, X_train, y_train,X_test, y_test ):
+def run_model3(model, X_train, y_train,X_test, y_test ):
     model.fit(X_train, y_train)
 
     """predict"""
@@ -258,7 +301,8 @@ def roc_plot(model,X_train3,y_train3,X_val,y_val):
     train_prob = model.predict_proba(X_train3)[:,1]
     val_prob = model.predict_proba(X_val)[:,1]
     plt.figure(figsize=(7,7))
-    for data in [[y_train3, train_prob],[y_val, val_prob]]: # ,[y_test, test_prob]
+    """[y_test, test_prob]"""
+    for data in [[y_train3, train_prob],[y_val, val_prob]]: 
         fpr, tpr, threshold = roc_curve(data[0], data[1])
         plt.plot(fpr, tpr)
     annot(fpr, tpr, threshold)
